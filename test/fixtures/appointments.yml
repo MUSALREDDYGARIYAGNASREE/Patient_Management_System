@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  date: 2025-06-22
+  time: MyString
+  purpose: MyString
+
+two:
+  patient: two
+  date: 2025-06-22
+  time: MyString
+  purpose: MyString

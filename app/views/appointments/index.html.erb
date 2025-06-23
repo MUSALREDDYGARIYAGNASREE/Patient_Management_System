@@ -1,0 +1,20 @@
+<p class="notice-message"><%= notice %></p>
+
+<% content_for :title, "Appointments" %>
+
+<h1 class="page-title">📅 Appointments</h1>
+
+<div id="appointments" class="appointments-grid">
+  <% @appointments.each do |appointment| %>
+    <div class="appointment-card">
+      <%= render appointment %>
+      <p class="card-action">
+        <%= link_to "🔍 Show this appointment", appointment, class: "view-link" %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<div class="new-button-wrapper">
+  <%= link_to "➕ New appointment", new_appointment_path, class: "form-button blue" %>
+</div>

@@ -1,0 +1,37 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">👨‍⚕️ Doctor Dashboard</h1>
+
+  <!-- Patients Added Per Day -->
+  <div class="chart-card">
+    <h2 class="chart-title">📅 Patients Added Per Day</h2>
+    <div class="chart-wrapper">
+      <%= bar_chart @patients_chart_data, height: "300px", library: { 
+        title: { text: "Patients Added Per Day" }, 
+        xAxis: { title: { text: "Date" } }, 
+        yAxis: { title: { text: "Number of Patients" } } 
+      } %>
+    </div>
+  </div>
+
+  <!-- Age Distribution -->
+  <div class="chart-card">
+    <h2 class="chart-title">🎂 Age Distribution of Patients</h2>
+    <div class="chart-wrapper">
+      <%= pie_chart @age_distribution, library: {
+        title: { text: "Age Groups" }
+      } %>
+    </div>
+  </div>
+
+  <!-- Appointments Per Day -->
+  <div class="chart-card">
+    <h2 class="chart-title">📆 Appointments Per Day</h2>
+    <div class="chart-wrapper">
+      <%= column_chart @appointments_chart_data, height: "300px", library: {
+        title: { text: "Appointments Per Day" },
+        xAxis: { title: { text: "Date" } },
+        yAxis: { title: { text: "Number of Appointments" } }
+      } %>
+    </div>
+  </div>
+</div>

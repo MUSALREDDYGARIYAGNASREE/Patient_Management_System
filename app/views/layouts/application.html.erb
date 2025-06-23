@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Clinic Portal" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "Chart.bundle" %>
+    <%= javascript_include_tag "chartkick" %>
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="main-body">
+    <header class="header">
+      <h1 class="logo">Clinic Portal</h1>
+      <nav class="nav">
+        <% if user_signed_in? %>
+          <span class="user-info">
+            Welcome, <%= current_user.email %> (<%= current_user.role %>)
+          </span>
+
+          <% if current_user.role == "doctor" %>
+            <%= button_to "Doctor Dashboard", dashboards_doctor_path, method: :get, form_class: "inline", class: "btn btn-primary" %>
+          <% elsif current_user.role == "receptionist" %>
+            <%= button_to "Receptionist Dashboard", dashboards_receptionist_path, method: :get, form_class: "inline", class: "btn btn-primary" %>
+            <%= button_to "Manage Patients", patients_path, method: :get, form_class: "inline", class: "btn btn-primary" %>
+          <% end %>
+
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, form_class: "inline", class: "btn btn-danger" %>
+        <% else %>
+          <%= button_to "Login", new_user_session_path, method: :get, form_class: "inline", class: "btn btn-secondary" %>
+          <%= button_to "Sign Up", new_user_registration_path, method: :get, form_class: "inline", class: "btn btn-success" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <% if notice %>
+        <p class="notice-box"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert-box"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      &copy; <%= Time.current.year %> Clinic Portal
+    </footer>
+  </body>
+</html>
